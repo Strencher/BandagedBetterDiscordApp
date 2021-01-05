@@ -4,6 +4,10 @@ import DOM from "./domtools";
 
 export default class Utilities {
 
+    static joinClassNames(...classNames) {
+        return classNames.filter(e => e).join(" ");
+    }
+
     static repoUrl(path) {
         return `https://cdn.staticaly.com/gh/rauenzi/BetterDiscordApp/${Config.hash}/${path}`;
     }
