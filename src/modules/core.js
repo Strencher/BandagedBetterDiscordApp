@@ -19,6 +19,7 @@ import Strings from "./strings";
 import LoadingIcon from "../loadingicon";
 import Utilities from "./utilities";
 import Notifications from "../ui/notifications";
+import Updater from "./updater";
 
 const {ipcRenderer} = require("electron");
 const GuildClasses = DiscordModules.GuildClasses;
@@ -83,6 +84,7 @@ export default new class Core {
         ReactComponents.initialize();
         ComponentPatcher.initialize();
         Notifications.initialize();
+        Updater.initialize();
 
         for (const module in Builtins) Builtins[module].initialize();
 

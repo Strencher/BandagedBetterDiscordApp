@@ -1,0 +1,55 @@
+.bd-updates-updated {
+    border-radius: 50%;
+    background: #43b581;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.bd-updates-arrow.spin {
+    animation: bd-updates-fetch 2s linear infinite;
+}
+
+.bd-updates-updated svg {
+    margin-top: 3px;
+    color: white;
+}
+
+@keyframes bd-updates-fetch {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.bd-updater-fetch {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 20px 10px;
+    background: var(--background-secondary-alt);
+    border-radius: 5px;
+}
+
+.bd-updates-arrow.fetching {
+    color: #ffa600;
+}
+
+.bd-updates-arrow.updated {
+    color: #43b581;
+}
+
+.bd-updates-arrow.outdated {
+    color: #f04747;
+}
+
+.bd-updates-arrow.updating {
+    color: #3e82e5;
+}
+
+.bd-text {
+    color: white;
+}
+
+.bd-updater-header button {
+    position: absolute;
+    right: 58px;
+}
