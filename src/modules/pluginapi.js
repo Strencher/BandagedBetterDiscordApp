@@ -12,6 +12,7 @@ import Settings from "./settingsmanager";
 import Logger from "./logger";
 import Patcher from "./patcher";
 import Emotes from "../builtins/emotes/emotes";
+import Notifications, {Types} from "../ui/notifications";
 
 const BdApi = {
     get React() {return DiscordModules.React;},
@@ -22,6 +23,16 @@ const BdApi = {
         return new Proxy(Emotes.Emotes, {
             get() {return Emotes.Emotes;},
             set() {Logger.warn("BdApi.emotes", "Addon policy for plugins #5 https://github.com/rauenzi/BetterDiscordApp/wiki/Addon-Policies#plugins");}
+        });
+    },
+    get Notifications() {
+        return new Proxy(Notifications, {
+            get(target, key) {
+                if (key == "Types") return Types;
+                if (!["show", "hide"].includes(key)) return;
+                return typeof(target[key]) == "function" ? target[key].bind(target) : target[key];
+            },
+            set() {Logger.warn("BdApi.Notifications", "Addon policy for plugins #5 https://github.com/rauenzi/BetterDiscordApp/wiki/Addon-Policies#plugins");}
         });
     },
     get version() {return Config.version;}

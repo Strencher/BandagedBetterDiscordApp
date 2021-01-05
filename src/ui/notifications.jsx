@@ -42,6 +42,7 @@ export class NotificationsContainer extends React.Component {
             element: <Notification options={options} onClose={() => this.removeNotification(id)} />
         });
         this.forceUpdate();
+        return id;
     }
 
     removeNotification(id) {
@@ -81,12 +82,12 @@ export default class Notifications {
 
         const id = DiscordModules.KeyGenerator(); // eslint-disable-line new-cap
 
-        this.ref.current.addNotification(id, options);
+        return this.ref.current.addNotification(id, options);
     }
 
     static hide(id) {
         if (!this.ref || !this.ref.current) return false;
-        return this.ref.current.removeNotification(id);
+        this.ref.current.removeNotification(id);
     }
 
     static forceUpdate() {
