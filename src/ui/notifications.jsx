@@ -75,6 +75,8 @@ export default class Notifications {
     static show(options = {}) {
         if (!this.ref || !this.ref.current) return false;
         if (!options.text) options.text = "";
+        if (Types[options.type]) options.type = Types[options.type];
+
         if (!options.onClose) options.onClose = () => {};
 
         const id = DiscordModules.KeyGenerator(); // eslint-disable-line new-cap
