@@ -11,11 +11,13 @@ export default class Updates extends React.Component {
         this.state = {
             fetching: false,
             updating: false,
-            updates: []
+            updates: props.updater.updates
         };
     }
     
     startUpdating() {
+        if (!this.state.fetching) return;
+
         this.setState({updating: true});
         setTimeout(() => {
             this.setState({updating: false, updates: []});
@@ -57,10 +59,10 @@ export default class Updates extends React.Component {
     }
 
     checkForUpdates() {
-        this.props.updater.checkForUpdates().then(updates => {
-            this.setState({fetching: false, updates});
-        });
-        this.setState({fetching: true});
+        // this.props.updater.checkForUpdates().then(updates => {
+        //     this.setState({fetching: false, updates});
+        // });
+        // this.setState({fetching: true});
     }
 
     componentDidMount() {
@@ -71,10 +73,7 @@ export default class Updates extends React.Component {
         return <>
             <Title text="Updates" button={{title: "Check For Updates", onClick: () => this.checkForUpdates()}}>Updates</Title>
             {this.renderTable()}
-            <Group name="BetterDiscord" collapsible={true}>
-                {this.renderVersionCard("Client", "BD v1.0.3", "5h6c7h5j", true)}
-                {this.renderVersionCard("Injector", "v1.0.6", "k54io54o", !this.state.updates.find(e => e.type == "injector"))}
-            </Group>
+            {this.props.updater.updateServices.map(e => <Group name={e.name} collapsible={true}>{e.renderItems(this.state.updates)}</Group>)}
         </>;
     }
 }

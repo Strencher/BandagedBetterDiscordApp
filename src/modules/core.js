@@ -19,6 +19,7 @@ import Strings from "./strings";
 import LoadingIcon from "../loadingicon";
 import Utilities from "./utilities";
 import Notifications from "../ui/notifications";
+import SettingsUpdater from "./settingsupdater";
 import Updater from "./updater";
 
 const {ipcRenderer} = require("electron");
@@ -85,6 +86,7 @@ export default new class Core {
         ComponentPatcher.initialize();
         Notifications.initialize();
         Updater.initialize();
+        SettingsUpdater.initialize();
 
         for (const module in Builtins) Builtins[module].initialize();
 
@@ -136,7 +138,7 @@ export default new class Core {
                     const css = fs.readFileSync(stylepath).toString();
                     DOMManager.injectStyle(data.name, css);
                     continue;
-                } 
+                }
                 else {
                     Logger.warn("Startup", "Local stylesheet was not found, loading remote...");
                 }
