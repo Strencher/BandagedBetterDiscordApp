@@ -15,6 +15,7 @@
 
 .bd-notifications {
     overflow: hidden;
+    display: contents;
 }
 
 .bd-notification {
