@@ -99,8 +99,8 @@ export default new class V2 {
         return Object.assign({}, guildsWrapper, guilds, pill);
 	}
 
-    get MessageContentComponent() {return this.WebpackModules.find(m => m.defaultProps && m.defaultProps.hasOwnProperty("disableButtons"));}
-    get MessageComponent() {return this.WebpackModules.find(m => m.default && m.default.displayName && m.default.displayName == "Message");}
+    get MessageContentComponent() {return this.WebpackModules.find(m => m && m.type && m.type.displayName == "MessageContent");}
+    get MessageComponent() {return this.WebpackModules.find(m => m && m.default && m.default.toString().search("childrenRepliedMessage") > -1);}
     get TimeFormatter() {return this.WebpackModules.findByUniqueProperties(["dateFormat"]);}
     get TooltipWrapper() {return this.WebpackModules.findByDisplayName("Tooltip");}
     get NativeModule() {return this.WebpackModules.findByUniqueProperties(["setBadge"]);}
